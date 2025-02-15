@@ -44,11 +44,13 @@ public class SnacksMachine {
         var exit = false;
         switch(option){
             case 1 -> buySnack(console, products);
+            case 2 -> seeTicket(products);
         }
         return exit;
     }
 
     private static void buySnack(Scanner console, List<Snack> products){
+        Snacks.showSnacks();
         System.out.print("Choose an snack (ID): ");
         var snackId = Integer.parseInt(console.nextLine());
 
@@ -67,4 +69,15 @@ public class SnacksMachine {
             System.out.println("ID not found: " + snackId);
     }
 
+    private static void seeTicket(List<Snack> products){
+        var ticket = " *** SALES RECEIPT ***";
+        var total = 0.0;
+        for ( var product : products){
+            ticket += "\n\t- " + product.getName() + " - $" + product.getPrice();
+            total += product.getPrice();
+        }
+        ticket += "\n\tTotal -> $" + total;
+
+        System.out.println(ticket);
+    }
 }
