@@ -52,6 +52,10 @@ public class Snack implements Serializable {
                 '}';
     }
 
+    public String writeSnackToFile(){
+        return snackID + "," + name + "," + price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

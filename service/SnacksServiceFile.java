@@ -65,7 +65,7 @@ public class SnacksServiceFile implements ISnacksService{
             //This line will decide if we will overwrite the file or append
             append = file.exists();
             var exit = new PrintWriter(new FileWriter(file,append));
-            exit.println(snack);
+            exit.println(snack.writeSnackToFile());
             exit.close(); //Write the info in the file
         } catch (Exception e) {
             System.out.println("ERROR ADDING SNACK" + e.getMessage());
