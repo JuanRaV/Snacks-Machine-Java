@@ -105,6 +105,6 @@ public class SnacksServiceFile implements ISnacksService{
 
     @Override
     public List<Snack> getSnacks() {
-        return List.of();
+        return this.snacks;
     }
 }
