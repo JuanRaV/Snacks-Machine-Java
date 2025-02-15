@@ -45,6 +45,12 @@ public class SnacksMachine {
         switch(option){
             case 1 -> buySnack(console, products);
             case 2 -> seeTicket(products);
+            case 3 -> addSnack(console);
+            case 4 ->{
+                System.out.println("THANKS FOR USING SNACK SYSTEM!");
+                exit = true;
+            }
+            default -> System.out.println("Invalid Option: " + option);
         }
         return exit;
     }
@@ -79,5 +85,15 @@ public class SnacksMachine {
         ticket += "\n\tTotal -> $" + total;
 
         System.out.println(ticket);
+    }
+
+    private static void addSnack(Scanner console){
+        System.out.print("Snack name: ");
+        var name = console.nextLine();
+        System.out.print("Snack price: ");
+        var price = Double.parseDouble(console.nextLine());
+        Snacks.addSnack(new Snack(name, price));
+        System.out.println("New Snack Added Successfully");
+        Snacks.showSnacks();
     }
 }
