@@ -5,6 +5,8 @@ import snacks_machine_files.domain.Snack;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class SnacksServiceFile implements ISnacksService{
 
             if(exists){
                 //If exists, load the data that we have in this file
-//                this.snacks = getSnacksFromFile();
+                this.snacks = getSnacksFromFile();
             }
             else{
                 //Create new file
@@ -47,6 +49,25 @@ public class SnacksServiceFile implements ISnacksService{
         this.addSnack(new Snack("CHIPS", 55.0));
         this.addSnack(new Snack("SODA", 35.0));
         this.addSnack(new Snack("SANDWICH", 130.0));
+    }
+
+    private List<Snack> getSnacksFromFile(){
+        List<Snack> snacks = new ArrayList<>();
+        try{
+            List<String>lines = Files.readAllLines(Paths.get(FILE_NAME));
+            for (String line:lines){
+                String [] lineSnack = line.split(",");
+                var snackID = lineSnack[0];
+                var name = lineSnack[1];
+                var price = lineSnack[2];
+                var snack = new Snack(name, Double.parseDouble(price));
+                snacks.add(snack);
+            }
+        } catch (Exception e) {
+            System.out.println("ERROR READING SANCK FILE: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return snacks;
     }
 
     @Override
@@ -74,7 +95,7 @@ public class SnacksServiceFile implements ISnacksService{
 
     @Override
     public void showSnacks() {
-
+        
     }
 
     @Override
